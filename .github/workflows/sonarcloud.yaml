@@ -1,4 +1,5 @@
 name: SonarCloud
+
 on:
   pull_request:
     branches:
@@ -37,6 +38,9 @@ jobs:
 
     - name: SonarCloud Scan
       uses: SonarSource/sonarcloud-github-action@e2a1ee7c31ee491f1e09c74535b1c0d3e9f5cd82
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
       with:
         args: >
           -Dsonar.python.version=3.12.3
@@ -46,11 +50,8 @@ jobs:
           -Dsonar.projectVersion=1.0
           -Dsonar.sources=.
           -Dsonar.sourceEncoding=UTF-8
-          -Dsonar.exclusions=**/tests/**,**/venv/**,**/.venv/**,**/__pycache__/**  
+          -Dsonar.exclusions=**/tests/**,**/venv/**,**/.venv/**,**/__pycache__/**
           -Dsonar.tests=tests
           -Dsonar.python.coverage.reportPaths=coverage.xml
           -Dsonar.python.xunit.reportPath=test-results.xml
           -Dsonar.coverage.exclusions=**/tests/**,**/venv/**,**/.venv/**,**/__pycache__/**
-      env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
