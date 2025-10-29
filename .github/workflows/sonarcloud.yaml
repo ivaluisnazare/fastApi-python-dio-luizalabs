@@ -46,8 +46,7 @@ jobs:
           -Dsonar.projectVersion=1.0
           -Dsonar.sources=.
           -Dsonar.sourceEncoding=UTF-8
-          -Dsonar.exclusions=**/tests/**,**/venv/**,**/.venv/**,**/__pycache__/**
-          
+          -Dsonar.exclusions=**/tests/**,**/venv/**,**/.venv/**,**/__pycache__/**  
           -Dsonar.tests=tests
           -Dsonar.python.coverage.reportPaths=coverage.xml
           -Dsonar.python.xunit.reportPath=test-results.xml
