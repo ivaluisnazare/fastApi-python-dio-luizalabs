@@ -4,12 +4,13 @@ from sqlalchemy.orm import sessionmaker, Session
 from pydantic import BaseModel
 import os
 
-DATABASE_URL = os.getenv("DATABASE_URL", "postgresql://user:athlete_dbd@postgres-service:5432/athlete_db")
+DATABASE_URL = os.getenv("DATABASE_URL")
+if not DATABASE_URL:
+    raise RuntimeError("DATABASE_URL environment variable is required and must not include credentials in source code")
 
 engine = create_engine(DATABASE_URL)
 SessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=engine)
 Base = declarative_base()
-
 
 class CategoryModel(Base):
     __tablename__ = "categories"
