@@ -1,0 +1,54 @@
+#apiVersion: apps/v1
+#kind: Deployment
+#metadata:
+#  name: category-deployment
+#spec:
+#  replicas: 1
+#  selector:
+#    matchLabels:
+#      app: category
+#  template:
+#    metadata:
+#      labels:
+#        app: category
+#    spec:
+#      containers:
+#      - name: category-container
+#        image: ivanazare/category:latest
+#        ports:
+#        - containerPort: 8000
+#        env:
+#        - name: DATABASE_URL
+#          valueFrom:
+#            configMapKeyRef:
+#              name: category-config
+#              key: DATABASE_URL
+#        - name: APP_ENV
+#          valueFrom:
+#            configMapKeyRef:
+#              name: category-config
+#              key: APP_ENV
+#        - name: APP_VERSION
+#          valueFrom:
+#            configMapKeyRef:
+#              name: category-config
+#              key: APP_VERSION
+#        resources:
+#          requests:
+#            memory: "128Mi"
+#            cpu: "100m"
+#          limits:
+#            memory: "256Mi"
+#            cpu: "200m"
+#        livenessProbe:
+#          httpGet:
+#            path: /health
+#            port: 8000
+#          initialDelaySeconds: 30
+#          periodSeconds: 10
+#        readinessProbe:
+#          httpGet:
+#            path: /health
+#            port: 8000
+#          initialDelaySeconds: 5
+#          periodSeconds: 5
