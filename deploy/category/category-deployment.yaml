@@ -12,13 +12,10 @@ spec:
       labels:
         app: category
     spec:
-        automountServiceAccountToken: false
-        containers:
-        - name: category-container
-          image: ivanazare/category:latest
-          resources:
-            requests:
-              ephemeral-storage: "1Gi"
+      automountServiceAccountToken: false
+      containers:
+      - name: category-container
+        image: ivanazare/category:v1.0.0  # Use uma tag específica em vez de 'latest'
         ports:
         - containerPort: 8000
         env:
@@ -41,6 +38,7 @@ spec:
           requests:
             memory: "128Mi"
             cpu: "100m"
+            ephemeral-storage: "1Gi"
           limits:
             memory: "256Mi"
             cpu: "200m"
