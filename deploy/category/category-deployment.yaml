@@ -15,7 +15,7 @@ spec:
       automountServiceAccountToken: false
       containers:
       - name: category-container
-        image: ivanazare/category:v1.0.0  # Use uma tag específica em vez de 'latest'
+        image: ivanazare/category:v1.0.0
         ports:
         - containerPort: 8000
         env:
