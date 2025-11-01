@@ -6,9 +6,8 @@ ENV APP_HOME=/app
 
 WORKDIR $APP_HOME
 
-RUN groupadd -r appuser && useradd -r -g appuser appuser
-
-RUN apt-get update && apt-get install -y --no-install-recommends \
+RUN groupadd -r appuser && useradd -r -g appuser appuser && \
+    apt-get update && apt-get install -y --no-install-recommends \
     gcc \
     g++ \
     && rm -rf /var/lib/apt/lists/*
@@ -18,7 +17,7 @@ COPY requirements.txt .
 RUN pip install --no-cache-dir --upgrade pip && \
     pip install --no-cache-dir -r requirements.txt
 
-RUN chown -R appuser:appuser $APP_HOME
+RUN chown -R appuser:appuser "$APP_HOME"
 
 USER appuser
 
